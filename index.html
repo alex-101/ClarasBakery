@@ -1,4 +1,5 @@
- <head>
+<head>
+    <script src="database.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clara's Bakery</title>
@@ -25,7 +26,37 @@
     </style>
   </head>
 <script>
+    var Debounce = false;
+	// "Box" item adder.
+	window.addEventListener('load', function () {
+        var i = 0
+		for(let v of menu) {
+			var HTML = `
+			<a onclick="addToBasket(${i})"><h2>${v.name} (${v.price})</h2></a>
+			`
+			document.getElementById("box").insertAdjacentHTML("beforeend",HTML)
+            i=i+1
+		}
+	})
+    // "Basket"
+    var Basket = []
+    function addToBasket(i) {
+        if(Debounce) { return } else {Debounce = true}
+        Basket.push(i)
+        var item = menu[parseInt(i)]
+    	var HTML = `
+		<a onclick=""><h2>${item.name}</h2></a>
+		`
+	    document.getElementById("basket").insertAdjacentHTML("beforeend",HTML)
+        Debounce = false;
+    }
+
+    function checkout() {
+        window.location.href = "checkout.html?basket="+Basket.concat();
+    }
+	
     function sendMessage() {
+        if(Debounce) { return } else {Debounce = true}
 		var name = document.getElementById("userNamee").value;
 		var order = document.getElementById("userOrderr").value;
 		var request = new XMLHttpRequest();
@@ -47,7 +78,8 @@ Order: ${order}
       request.send(JSON.stringify(params));
 	  	      document.getElementById("box").innerHTML = `
       <h1>Submit Order!</h1>
-      `
+      `        
+      Debounce = false;
 	}
 </script>
 <body>
@@ -55,15 +87,15 @@ Order: ${order}
 <h1 id="headerText">Clara's Bakery</h1>
 </div>
 <div class="box" id="box">
-<label for=“order”>Your Order:</label><br>
-<select id="userOrderr">
-<option value=”Tea”>Tea</option>
-<option value=”Cookies”>Cookies</option>
-<option value=”Water”>Water</option>
-</select>	
-<br><br>
-<label for=“name”>Your Name:</label><br>
-<input name="name" id="userNamee"></input>
-<br><br><button onclick="sendMessage()">Submit</button>
+<span style="text-decoration: underline;"> <h2>Click An Option To Add it To Your Basket</h2></span>
+<h3>PRICE IS THERE FOR EFFECT >> YOU WILL NOT BE CHARGED</h3>
 </div>
+<div class="box" id="basket">
+<span style="text-decoration: underline;"> <h2>Your Basket</h2></span>
+</div>
+
+<div class="box" id="checkout">
+<a onclick="checkout()"><h2>Click To Checkout</h2></a>
+</div>
+<p>Website by Alex, 2021.</p>
 </body>

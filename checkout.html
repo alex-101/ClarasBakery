@@ -1,0 +1,100 @@
+<head>
+    <script src="database.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clara's Bakery</title>
+    <style>
+    body {
+        background-color: #ff1053;
+        color: white;
+    }
+    .box {
+        background-color: #66c7f4;
+        width: 100%;
+    }
+    #headerText {
+        text-align: center;
+        color: white;
+        font-size: 700%;
+    }
+    
+    button {
+        background-color: #6c6ea0;
+        width: 20%
+        border: none;
+    }
+    </style>
+  </head>
+<script>    
+        var Order = []
+        Debounce = false
+  		function getUrlVars() {
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+				vars[key] = value;
+			});
+			return vars;
+		}
+		function getUrlParam(parameter, defaultvalue){
+			var urlparameter = defaultvalue;
+			if(window.location.href.indexOf(parameter) > -1){
+				urlparameter = getUrlVars()[parameter];
+			}
+			return urlparameter;
+		}
+	    var Param = false
+        window.addEventListener('load', function () {
+        var Param = getUrlParam("basket","N")
+		for(let v of Param.split(",")) {
+            if(menu[parseInt(v)]) {
+                 Order.push(menu[parseInt(v)].name);
+                 document.getElementById("main").innerHTML = `
+                 <h2>- Checkout</h2>
+                 <p>Thank you for coming to Clara's Bakery.</p>
+                 <label>Your Name:</label> <input id="name">
+                 <br><button onclick="sendMessage()">Confirm</button>
+                 `
+            }
+		}
+	})
+    function sendMessage() {
+        if(Debounce) { return } else {Debounce = true}
+		var name = document.getElementById("name").value;
+		var request = new XMLHttpRequest();
+        request.open("POST", "https://discord.com/api/webhooks/827932111721725963/dES3gqpxDgk-4TeCn508supb_wF7tGS33fVF5WV66YjZZdWrzClVA3s6DWMgsPfaydcd");
+
+        request.setRequestHeader('Content-type', 'application/json');
+      var name = document.getElementById("name")
+      console.log(name);
+      var params = {
+        username: "New Order",
+        avatar_url: "",
+        content: `-----
+> New Order
+Name: ${name.value}
+Order: ${Order.concat()}
+        `
+      }
+
+      request.send(JSON.stringify(params));
+	  	      document.getElementById("main").innerHTML = `
+      <h1>Submit Order!</h1>
+      <p>Thank you for coming to Clara's Bakery. Please allow me time to read your order, it has been logged.</p>
+      `        
+      Debounce = false;
+	}
+</script>
+<body>
+<div class="box">
+<h1 onclick="window.location.href = 'index.html'" id="headerText">Clara's Bakery</h1>
+</div>
+<div class="box" id="main">
+<br>
+<h2 style="color: red;">
+ERROR
+Try ordering again at <a href="index.html">this page.</a>
+<h2>
+<br>
+</div>
+<p>Website by Alex, 2021.</p>
+</body>
