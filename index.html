@@ -1,0 +1,69 @@
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clara's Bakery</title>
+    <style>
+    body {
+        background-color: #ff1053;
+        color: white;
+    }
+    .box {
+        background-color: #66c7f4;
+        width: 100%;
+    }
+    #headerText {
+        text-align: center;
+        color: white;
+        font-size: 700%;
+    }
+    
+    button {
+        background-color: #6c6ea0;
+        width: 20%
+        border: none;
+    }
+    </style>
+  </head>
+<script>
+    function sendMessage() {
+		var name = document.getElementById("userNamee").value;
+		var order = document.getElementById("userOrderr").value;
+		var request = new XMLHttpRequest();
+        request.open("POST", "https://discord.com/api/webhooks/827932111721725963/dES3gqpxDgk-4TeCn508supb_wF7tGS33fVF5WV66YjZZdWrzClVA3s6DWMgsPfaydcd");
+
+        request.setRequestHeader('Content-type', 'application/json');
+      var name = document.getElementById("userNamee")
+      console.log(name);
+      var params = {
+        username: "New Order",
+        avatar_url: "",
+        content: `-----
+> New Order
+Name: ${name.value}
+Order: ${order}
+        `
+      }
+
+      request.send(JSON.stringify(params));
+	  	      document.getElementById("box").innerHTML = `
+      <h1>Submit Order!</h1>
+      `
+	}
+</script>
+<body>
+<div class="box">
+<h1 id="headerText">Clara's Bakery</h1>
+</div>
+<div class="box" id="box">
+<label for=“order”>Your Order:</label><br>
+<select id="userOrderr">
+<option value=”Tea”>Tea</option>
+<option value=”Cookies”>Cookies</option>
+<option value=”Water”>Water</option>
+</select>	
+<br><br>
+<label for=“name”>Your Name:</label><br>
+<input name="name" id="userNamee"></input>
+<br><br><button onclick="sendMessage()">Submit</button>
+</div>
+</body>
