@@ -12,6 +12,12 @@
         background-color: #66c7f4;
         width: 100%;
     }
+	.basket {
+		color: black;
+		background-color: white;
+		border: 1px solid black;
+		border-radius: 8px;
+	}
     #headerText {
         text-align: center;
         color: white;
@@ -34,7 +40,7 @@
 			var HTML = `
 			<a onclick="addToBasket(${i})"><h2>${v.name} (${v.price})</h2></a>
 			`
-			document.getElementById("box").insertAdjacentHTML("beforeend",HTML)
+			document.getElementById("menu-"+v.type).insertAdjacentHTML("beforeend",HTML)
             i=i+1
 		}
 	})
@@ -86,12 +92,16 @@ Order: ${order}
 <div class="box">
 <h1 id="headerText">Clara's Bakery</h1>
 </div>
-<div class="box" id="box">
 <span style="text-decoration: underline;"> <h2>Click An Option To Add it To Your Basket</h2></span>
 <h3>PRICE IS THERE FOR EFFECT >> YOU WILL NOT BE CHARGED</h3>
+<div class="box" id="menu-drinks">
+<span style="text-decoration: underline;"> <h2>- Drinks</h2></span>
 </div>
-<div class="box" id="basket">
-<span style="text-decoration: underline;"> <h2>Your Basket</h2></span>
+<div class="box" id="menu-shortbread">
+<span style="text-decoration: underline;"> <h2>- Shortbread</h2></span>
+</div>
+<div class="basket" id="basket">
+<span style="text-decoration: underline;"> <h2>- Basket</h2></span>
 </div>
 
 <div class="box" id="checkout">
