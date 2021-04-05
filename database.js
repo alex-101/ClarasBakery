@@ -33,5 +33,6 @@ name: "Cake",
 description: "N/A",
 price: "15P",
 type: "shortbread"
+}
 ///
 ]
