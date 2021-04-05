@@ -29,10 +29,10 @@ var menu = [
 },
 
 {
-name: "Cake",
-description: "N/A",
-price: "15P",
-type: "shortbread"
+	name: "Cake",
+	description: "N/A",
+	price: "15P",
+	type: "cakes"
 }
 ///
 ]
