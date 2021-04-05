@@ -26,6 +26,12 @@ var menu = [
 	description: "N/A",
 	price: "10P",
 	type: "shortbread"
-}
+},
+
+{
+name: "Cake",
+description: "N/A",
+price: "15P",
+type: "shortbread"
 ///
 ]
