@@ -1,38 +1,24 @@
 var menu = [
 ///
 {
-	name: "Tea",
-	description: "Enjoy a nice hot cuppa.",
-	price: "10P",
-	type: "drinks"
-},
-
-{
-	name: "Coffee",
-	description: "If you don't like tea, maybe try this?",
-	price: "10P",
-	type: "drinks"
-},
-
-{
-	name: "Sticks",
-	description: "Yum Yum!",
-	price: "10P",
-	type: "shortbread"
-},
-
-{
-	name: "Stars",
+	name: "Mars",
 	description: "N/A",
-	price: "10P",
-	type: "shortbread"
+	price: 0.10,
+	type: "sweets"
 },
 
 {
-	name: "Cake",
+	name: "Fruit-tella DUO STICK",
 	description: "N/A",
-	price: "15P",
-	type: "cakes"
-}
+	price: 0.15,
+	type: "sweets"
+},
+
+{
+	name: "Chocolate Egg",
+	description: "N/A",
+	price: 0.20,
+	type: "sweets"
+},
 ///
 ]

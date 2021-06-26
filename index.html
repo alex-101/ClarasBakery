@@ -46,6 +46,7 @@
 	})
     // "Basket"
     var Basket = []
+    var Total = 0
     function addToBasket(i) {
         if(Debounce) { return } else {Debounce = true}
         Basket.push(i)
@@ -53,7 +54,11 @@
     	var HTML = `
 		<a onclick=""><h2>${item.name}</h2></a>
 		`
+        Total = parseInt((Total*100) + (item.price*100))/100
+        
+
 	    document.getElementById("basket").insertAdjacentHTML("beforeend",HTML)
+        document.getElementById("total").innerHTML = `Current Total: ${Total} (Pounds)`;
         Debounce = false;
     }
 
@@ -90,23 +95,19 @@ Order: ${order}
 </script>
 <body>
 <div class="box">
-<h1 id="headerText">Clara's Bakery</h1>
+<h1 id="headerText">Clara's Sweet Shop</h1>
 </div>
 <span style="text-decoration: underline;"> <h2>Click An Option To Add it To Your Basket</h2></span>
 <h3>PRICE IS THERE FOR EFFECT >> YOU WILL NOT BE CHARGED</h3>
-<div class="box" id="menu-drinks">
-<span style="text-decoration: underline;"> <h2>- Drinks</h2></span>
+<div class="box" id="menu-sweets">
+<span style="text-decoration: underline;"> <h2>- Sweets</h2></span>
 </div>
-<div class="box" id="menu-cakes">
-<span style="text-decoration: underline;"> <h2>- Cakes</h2></span>
-</div>
-<div class="box" id="menu-shortbread">
-<span style="text-decoration: underline;"> <h2>- Shortbread</h2></span>
-</div>
+
 
 <div class="basket" id="basket">
 <span style="text-decoration: underline;"> <h2>- Basket</h2></span>
 </div>
+<h1 id="total">Current Total: 0.00 (Pounds)</h1>
 
 <div class="box" id="checkout">
 <a onclick="checkout()"><h2>Click To Checkout</h2></a>

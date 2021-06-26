@@ -2,7 +2,7 @@
     <script src="database.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clara's Bakery</title>
+    <title>Sweet Shop</title>
     <style>
     body {
         background-color: #ff1053;
@@ -27,6 +27,7 @@
   </head>
 <script>    
         var Order = []
+        var Total = 0
         Debounce = false
   		function getUrlVars() {
 			var vars = {};
@@ -47,10 +48,12 @@
         var Param = getUrlParam("basket","N")
 		for(let v of Param.split(",")) {
             if(menu[parseInt(v)]) {
-                 Order.push(menu[parseInt(v)].name);
+                 Order.push(menu[parseInt(v)].name+" : "+menu[parseInt(v)].price+"\n");
+                 Total = parseInt((Total*100) + (menu[parseInt(v)].price*100))/100
                  document.getElementById("main").innerHTML = `
                  <h2>- Checkout</h2>
                  <p>Thank you for coming to Clara's Bakery.</p>
+                 <p><u>Please confirm you wish to submit this order worth ${Total}.</u></p>
                  <label>Your Name:</label> <input id="name">
                  <br><button onclick="sendMessage()">Confirm</button>
                  `
@@ -72,7 +75,8 @@
         content: `-----
 > New Order
 Name: ${name.value}
-Order: ${Order.concat()}
+Order: \n${Order.concat()}
+Total: ${Total}
         `
       }
 
@@ -86,7 +90,7 @@ Order: ${Order.concat()}
 </script>
 <body>
 <div class="box">
-<h1 onclick="window.location.href = 'index.html'" id="headerText">Clara's Bakery</h1>
+<h1 onclick="window.location.href = 'index.html'" id="headerText">Clara's Sweet Shop</h1>
 </div>
 <div class="box" id="main">
 <br>
