@@ -19,6 +19,6 @@ var menu = [
 	description: "N/A",
 	price: 0.20,
 	type: "sweets"
-},
+}
 ///
 ]
